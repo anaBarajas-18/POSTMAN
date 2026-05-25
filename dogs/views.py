@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from .models import Dog
 
 def dogs_list(request):
-    # Obtener todos los perritos, aplicar filtros si vienen en la query
+
     queryset = Dog.objects.all()
     
     min_age = request.GET.get('min_age')
@@ -35,7 +35,7 @@ def dogs_list(request):
         queryset = queryset.order_by(ordering)
     
     data = list(queryset.values())
-    # Convertir Decimal a float para JSON (si hay campos weight)
+   
     for item in data:
         if 'weight' in item and item['weight'] is not None:
             item['weight'] = float(item['weight'])
